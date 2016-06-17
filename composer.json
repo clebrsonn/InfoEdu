@@ -14,12 +14,12 @@
     "php": ">=5.5",
     "doctrine/orm": "2.4.*",
     "symfony/yaml": "2.*",
-    "twitter/bootstrap": "v3.3.5"
+    "twitter/bootstrap": "v3.*"
   },
   "autoload": {
     "psr-4": {
-      "Paada": "src/",
-      "Paada\\Config": "core/"
+      "Paada\\": "src/",
+      "Paada\\Config\\": "core/"
     }
   },
   "config": {

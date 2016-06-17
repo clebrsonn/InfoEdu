@@ -6,10 +6,13 @@
  * Time: 23:58
  */
 
-namespace Paada\BD;
+namespace Paada\Config\Settings;
 
 use PDO;
 
+/**
+ * @property array connection
+ */
 class BDConnection
 {
 
@@ -45,5 +48,20 @@ class BDConnection
     {
         $this->dbh = null;
     }
+
+    public static function getConnection()
+    {
+        $connection = array(
+            'driver' => 'pdo_mysql',
+            'user' => 'root',
+            'password' => '',
+            'dbname' => 'reader',
+            'host' => 'localhost',
+            'port' => '3306'
+        );
+
+        return $connection;
+    }
+
 
 }
