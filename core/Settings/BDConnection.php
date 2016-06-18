@@ -55,7 +55,7 @@ class BDConnection
             'driver' => 'pdo_mysql',
             'user' => 'root',
             'password' => '',
-            'dbname' => 'reader',
+            'dbname' => 'paada',
             'host' => 'localhost',
             'port' => '3306'
         );

@@ -11,6 +11,26 @@ namespace Paada\Model;
 
 class Professor extends Usuario
 {
+    use Pessoa;
+    private $disciplina;
+
+    /**
+     * @return mixed
+     */
+    public function getDisciplina()
+    {
+        return $this->disciplina;
+    }
+
+    /**
+     * @param mixed $disciplina
+     */
+    public function setDisciplina(Disciplina $disciplina)
+    {
+        $this->disciplina = $disciplina;
+    }
+
+
 
 
 }

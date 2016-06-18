@@ -9,14 +9,62 @@
 namespace Paada\Model;
 
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+
 trait Pessoa
 {
 
+    /**
+     * @Id
+     * @GeneratedValue(strategy="AUTO")
+     * @Column(type="integer")
+     *
+     */
+    private $id;
+
+    /**
+     * @Column(type="text")
+     *
+     */
     private $nome;
+
+
+    /**
+     * @Column(type="text")
+     *
+     */
     private $sobrenome;
+
+
+    /**
+     * @Column(type="text")
+     *
+     */
     private $e_mail;
+
+
+    /**
+     * @Column(type="text")
+     *
+     */
     private $telefone;
+
+
+    /**
+     * @Column(type="text")
+     *
+     */
     private $endereco;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed

@@ -12,5 +12,26 @@ namespace Paada\Model;
 class Responsavel extends Usuario
 {
     use Pessoa;
+    private $aluno;
+
+    /**
+     * @return mixed
+     */
+    public function getAluno()
+    {
+        return $this->aluno;
+    }
+
+    /**
+     * @param mixed $aluno
+     * @return Aluno
+     */
+    public function setAluno(Aluno $aluno)
+    {
+        $this->aluno = $aluno;
+        return $this;
+    }
+
+
 
 }

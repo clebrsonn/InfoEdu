@@ -9,11 +9,27 @@
 namespace Paada\Model;
 
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="notas")
+ */
 class Notas
 {
 
+    /**
+     * @ORM\OneToMany(targetEntity="Aluno", mappedBy="")
+     */
     private $aluno;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Disciplina", inversedBy="notas")
+     */
     private $disciplina;
+    /**
+     * @ORM\Column(type="float")
+     */
     private $notas;
 
     /**
@@ -27,7 +43,7 @@ class Notas
     /**
      * @param mixed $aluno
      */
-    public function setAluno($aluno)
+    public function setAluno(Aluno $aluno)
     {
         $this->aluno = $aluno;
     }
@@ -59,7 +75,7 @@ class Notas
     /**
      * @param mixed $notas
      */
-    public function setNotas(Notas $notas)
+    public function setNotas($notas)
     {
         $this->notas = $notas;
     }

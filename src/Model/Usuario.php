@@ -9,10 +9,17 @@
 namespace Paada\Model;
 
 
+use Doctrine\ORM\Mapping as ORM;
+
 class Usuario
 {
-    private $senha;
-    private $username;
+    private $id;
+    /**
+     * @ORM\Column(type="string")
+     */private $senha;
+    /**
+     * @ORM\Column(type="string")
+     */private $username;
 
     /**
      * @return mixed
