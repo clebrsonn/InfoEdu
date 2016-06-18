@@ -9,11 +9,13 @@
 namespace Paada\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Doctrine\ORM\Mapping\Entity
- * @Doctrine\ORM\Mapping\Table(name="disciplina")
+ * @ORM\Entity
+ * @ORM\Table(name="disciplina")
  */
 class Disciplina
 {
@@ -25,8 +27,9 @@ class Disciplina
     private $id;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Professor", mappedBy="disciplina")
+     * @var Collection|Professor
+     * @ORM\ManyToOne(targetEntity="Professor", inversedBy="disciplina")
+     * @ORM\JoinColumn(name="professor_id", referencedColumnName="id")
      */
     private $professor;
 
@@ -41,10 +44,21 @@ class Disciplina
      */
     private $nome_disciplina;
     /**
-     * @var \Doctrine\Common\Collections\Collection|Agenda[]
+     * @var Collection|Agenda[]
      * @ORM\OneToMany(targetEntity="Agenda",mappedBy="disciplina", cascade={"all"})
      */
     private $agenda;
+
+    /**
+     * Disciplina constructor.
+     */
+    public function __construct()
+    {
+        $this->agenda = new ArrayCollection();
+        $this->professor = new ArrayCollection();
+
+    }
+
 
     /**
      * @return mixed
@@ -67,7 +81,20 @@ class Disciplina
      */
     public function setProfessor(Professor $professor)
     {
-        $this->professor = $professor;
+        if (!$this->professor->contains($professor)) {
+            $this->professor[] = $professor;
+            $professor->setDisciplina($this);
+        }
+    }
+
+    /**
+     * Remove agenda
+     *
+     * @param \Paada\Model\Agenda $agenda
+     */
+    public function removeProfessor(Professor $professor)
+    {
+        $this->professor->removeElement($professor);
     }
 
     /**
@@ -113,10 +140,21 @@ class Disciplina
     /**
      * @param mixed $agenda
      */
-    public function setAgenda($agenda)
+    public function setAgenda(Agenda $agenda)
     {
-        $this->agenda = $agenda;
+        if (!$this->agenda->contains($agenda)) {
+            $this->agenda[] = $agenda;
+            $agenda->setDisciplina($this);
+        }
     }
 
-
+    /**
+     * Remove agenda
+     *
+     * @param \Paada\Model\Agenda $agenda
+     */
+    public function removeAgenda(Agenda $agenda)
+    {
+        $this->agenda->removeElement($agenda);
+    }
 }

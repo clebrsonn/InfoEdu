@@ -9,6 +9,7 @@
 namespace Paada\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -26,8 +27,8 @@ class Aluno extends Usuario
     /**
      * @ManyToOne(targetEntity="Responsavel", fetch="EAGER",
      *     inversedBy="aluno")
+     * @ORM\JoinColumn(name="responsavel_id", referencedColumnName="id")
      *
-     * @Column(type="string")
      */
     private $responsavel;
 
@@ -37,17 +38,34 @@ class Aluno extends Usuario
     private $data_nascimento;
 
     /**
-     * @OneToMany(targetEntity="Disciplina",mappedBy="turma")
+     * @ORM\ManyToMany(targetEntity="Turma", mappedBy="alunos")
+     * @ORM\JoinTable(name="turma_alunos",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="turma_id", referencedColumnName="id")
+     *  }
+     * )
      *
-     * @Column(type="string")
      */
     private $turma;
 
 
     /**
-     * @Column(type="string")
+     * @var \Doctrine\Common\Collections\Collection|Notas[]
+     * @OneToMany(targetEntity="Notas", mappedBy="aluno")
      */
     private $notas;
+
+    /**
+     * Aluno constructor.
+     *
+     */
+    public function __construct()
+    {
+        $this->notas = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -58,14 +76,26 @@ class Aluno extends Usuario
     }
 
     /**
-     * @param mixed $notas
+     * @param Notas $nota
      */
-    public function setNotas($notas)
+    public function setNotas(Notas $nota)
     {
-        $this->notas = $notas;
+        if (!$this->notas->contains($nota)) {
+            $this->notas[] = $nota;
+            $nota->setAluno($this);
+        }
+
     }
 
-    
+    /**
+     * Remove turma
+     *
+     * @param \Paada\Model\Turma $turma
+     */
+    public function removeTurma(Turma $turma)
+    {
+        $this->turma->removeElement($turma);
+    }
 
     /**
      * @return mixed

@@ -25,28 +25,28 @@ trait Pessoa
     private $id;
 
     /**
-     * @Column(type="text")
+     * @Column(type="string")
      *
      */
     private $nome;
 
 
     /**
-     * @Column(type="text")
+     * @Column(type="string")
      *
      */
     private $sobrenome;
 
 
     /**
-     * @Column(type="text")
+     * @Column(type="string")
      *
      */
     private $e_mail;
 
 
     /**
-     * @Column(type="text")
+     * @Column(type="string")
      *
      */
     private $telefone;

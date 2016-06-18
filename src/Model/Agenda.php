@@ -9,43 +9,38 @@
 namespace Paada\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\Table;
-use Paada\Model\Disciplina;
+
 
 /**
- * @Entity
- * @Table(name="agenda")
+ * @ORM\Entity
+ * @ORM\Table(name="agenda")
  *
  */
 class Agenda
 {
     /**
-     * @Id
-     * @GeneratedValue(strategy="AUTO")
-     * @Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      *
      */
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Disciplina",inversedBy="agenda", cascade={"all"})
-     * @Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Disciplina",inversedBy="agenda", cascade={"all"})
+     * @ORM\JoinColumn(name="disciplina_id", referencedColumnName="id")
+     *
      */
     private $disciplina;
 
     /**
-     * @Column(type="date")
+     * @ORM\Column(type="date")
      *
      */
     private $data;
 
     /**
-     * @Column(type="string")
+     * @ORM\Column(type="text")
      *
      */
     private $texto;

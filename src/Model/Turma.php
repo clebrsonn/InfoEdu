@@ -9,6 +9,7 @@
 namespace Paada\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,19 +24,38 @@ class Turma
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="AnoLetivo", inversedBy="turmas")
      */
     private $ano_letivo;
+
     /**
      * @ORM\Column(type="string")
      */
     private $nome_turma;
     /**
      * @var \Doctrine\Common\Collections\Collection|Disciplina[]
-     * @ORM\Column(type="string")
+     * @ORM\OneToMany(targetEntity="Disciplina", mappedBy="turma")
      */
     private $disciplinas;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Aluno[]
+     * @ORM\ManyToMany(targetEntity="Aluno", inversedBy="turma")
+     */
+    private $alunos;
+
+    /**
+     * Turma constructor.
+     */
+    public function __construct()
+    {
+        $this->alunos = new ArrayCollection();
+        $this->disciplinas = new ArrayCollection();
+    }
+
 
     /**
      * @return mixed

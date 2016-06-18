@@ -19,18 +19,35 @@ class Notas
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="Aluno", mappedBy="")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="Aluno", inversedBy="notas")
+     * @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
      */
     private $aluno;
 
     /**
      * @ORM\ManyToOne(targetEntity="Disciplina", inversedBy="notas")
+     * @ORM\Column(type="string")
      */
     private $disciplina;
+
     /**
      * @ORM\Column(type="float")
      */
     private $notas;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -75,9 +92,9 @@ class Notas
     /**
      * @param mixed $notas
      */
-    public function setNotas($notas)
+    public function setNotas($nota)
     {
-        $this->notas = $notas;
+        $this->notas = $nota;
     }
 
 

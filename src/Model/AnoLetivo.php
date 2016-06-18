@@ -9,6 +9,7 @@
 namespace Paada\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +34,21 @@ class AnoLetivo
      * @ORM\Column(type="date")
      */
     private $data_criacao;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Turma[]
+     * @ORM\OneToMany(targetEntity="Turma", mappedBy="ano_letivo")
+     */
+    private $turmas;
+
+    /**
+     * AnoLetivo constructor.
+     */
+    public function __construct()
+    {
+        $this->turmas = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -74,5 +90,33 @@ class AnoLetivo
         $this->data_criacao = $data_criacao;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTurmas()
+    {
+        return $this->turmas;
+    }
+
+    /**
+     * @param mixed Turma $turmas
+     */
+    public function setTurmas(Turma $turma)
+    {
+        if (!$this->turmas->contains($turma)) {
+            $this->turmas[] = $turma;
+            $turma->setAnoLetivo($this);
+        }
+    }
+
+    /**
+     * Remove turmas
+     *
+     * @param \Paada\Model\Turma $turmas
+     */
+    public function removeTurma(Turma $turmas)
+    {
+        $this->turmas->removeElement($turmas);
+    }
 
 }

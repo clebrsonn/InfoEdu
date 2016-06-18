@@ -11,15 +11,31 @@ namespace Paada\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="usuario")
+ */
 class Usuario
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
     private $id;
     /**
      * @ORM\Column(type="string")
-     */private $senha;
+     */
+    private $senha;
     /**
      * @ORM\Column(type="string")
-     */private $username;
+     */
+    private $username;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -52,7 +68,6 @@ class Usuario
     {
         $this->username = $username;
     }
-
 
 
 }
