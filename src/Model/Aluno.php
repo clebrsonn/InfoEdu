@@ -20,9 +20,8 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @Doctrine\ORM\Mapping\Entity
  * @Doctrine\ORM\Mapping\Table(name="aluno")
  */
-class Aluno extends Usuario
+class Aluno extends Pessoa
 {
-    use Pessoa;
 
     /**
      * @ManyToOne(targetEntity="Responsavel", fetch="EAGER",

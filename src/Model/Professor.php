@@ -17,14 +17,20 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="professor")
  */
-class Professor extends Usuario
+class Professor extends Pessoa
 {
-    use Pessoa;
+
     /**
      * @var Collection|Disciplina
      * @ORM\OneToMany(targetEntity="Disciplina", mappedBy="disciplina")
      */
     private $disciplina;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Usuario", inversedBy="professor")
+     *  @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
 
     /**
      * Professor constructor.
@@ -62,6 +68,24 @@ class Professor extends Usuario
     public function removeDisciplina(\Paada\Model\Disciplina $disciplina)
     {
         $this->disciplina->removeElement($disciplina);
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param Usuario $usuario
+     * @return Professor
+     */
+    public function setUsuario(Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+        return $this;
     }
 
 

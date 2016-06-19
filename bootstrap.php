@@ -25,22 +25,3 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src/Mod
 // obtaining the entity manager
 $entityManager = EntityManager::create(BDConnection::getConnection(), $config);
 return $entityManager;
-
-
-
-
-//// Create a simple "default" Doctrine ORM configuration for Annotations
-//$isDevMode = true;
-//$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/Model"), $isDevMode);
-//// or if you prefer Yaml or XML
-////$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
-////$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/Yaml"), $isDevMode);
-//
-//// database configuration parameters
-//$conn = array(
-//    'driver' => 'pdo_sqlite',
-//    'path' => __DIR__ . '/db.sqlite',
-//);
-//
-//// obtaining the entity manager
-//$entityManager = EntityManager::create(BDConnection::getConnection(), $config);

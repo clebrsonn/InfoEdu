@@ -17,14 +17,19 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="responsavel")
  */
-class Responsavel extends Usuario
+class Responsavel extends Pessoa
 {
-    use Pessoa;
     /**
      * @var Collection|Aluno
      * @ORM\OneToMany(targetEntity="Aluno", mappedBy="responsavel")
      */
     private $aluno;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Usuario", inversedBy="permissao")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
 
     /**
      * Responsavel constructor.
@@ -63,6 +68,24 @@ class Responsavel extends Usuario
     public function removeAluno(Aluno $aluno)
     {
         $this->aluno->removeElement($aluno);
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param Usuario $usuario
+     * @return Responsavel
+     */
+    public function setUsuario(Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+        return $this;
     }
 
 

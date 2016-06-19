@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 
-trait Pessoa
+class Pessoa
 {
 
     /**
@@ -22,41 +22,41 @@ trait Pessoa
      * @Column(type="integer")
      *
      */
-    private $id;
+    protected $id;
 
     /**
      * @Column(type="string")
      *
      */
-    private $nome;
-
-
-    /**
-     * @Column(type="string")
-     *
-     */
-    private $sobrenome;
+    protected $nome;
 
 
     /**
      * @Column(type="string")
      *
      */
-    private $e_mail;
+    protected $sobrenome;
 
 
     /**
      * @Column(type="string")
      *
      */
-    private $telefone;
+    protected $e_mail;
+
+
+    /**
+     * @Column(type="string")
+     *
+     */
+    protected $telefone;
 
 
     /**
      * @Column(type="text")
      *
      */
-    private $endereco;
+    protected $endereco;
 
     /**
      * @return mixed

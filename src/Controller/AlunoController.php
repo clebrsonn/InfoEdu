@@ -8,16 +8,26 @@
 
 namespace Paada\Controller;
 
-use Paada\Model\Aluno;
-
 class AlunoController
 {
-
 
     /**
      * AlunoController constructor.
      */
     public function __construct()
     {
+    }
+
+    public function novoAluno($request)
+    {
+
+//        $user = new User();
+//        $form = $this->createForm('AppBundle\Form\UserType', $user);
+//        $form->handleRequest($request);
+
+
+        $em->persist($user);
+        $em->flush();
+
     }
 }

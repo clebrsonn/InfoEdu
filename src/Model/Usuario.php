@@ -32,6 +32,38 @@ class Usuario
      */
     private $username;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="Professor", mappedBy="usuario")
+     * @ORM\OneToOne(targetEntity="Responsavel", mappedBy="usuario")
+     */
+    private $permissao;
+
+//    /**
+//
+//     */
+//    private $permissao;
+
+
+    /**
+     * @return mixed
+     */
+    public function getPermissao()
+    {
+        return $this->permissao;
+    }
+
+    /**
+     * @param mixed $permissao
+     * @return mixed
+     */
+    public function setPermissao($permissao)
+    {
+        $this->permissao = $permissao;
+        return $this;
+    }
+
+
     public function getId()
     {
         return $this->id;
@@ -68,6 +100,5 @@ class Usuario
     {
         $this->username = $username;
     }
-
 
 }
