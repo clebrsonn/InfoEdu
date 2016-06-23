@@ -9,8 +9,6 @@
 namespace Paada\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Paada\Model\Professor;
-use Paada\Model\Responsavel;
 use Slim\Http\Request;
 use Slim\Slim;
 
@@ -22,14 +20,15 @@ class UsuarioController
 
     public function login(Request $request, EntityManager $em)
     {
-        $resp = $em
+        $user = $em
             ->getRepository('Paada\Model\Usuario')
             ->findOneBy(array('username' => $request->post('form-username'),
                 'senha' => $request->post('form-password')));
 
-        var_dump($resp->getPermissao());
+        var_dump($user->getPermissao());
 //        if (!is_null($resp) && $resp->getPermissao() instanceof Responsavel) {
 //            session_start();
+        $_SESSION['PHP_AUTH_USER'] = $user;
 //            echo "aqui";
 //
 //        } elseif (!is_null($resp) && $resp->getPermissao() instanceof Professor) {
@@ -43,6 +42,7 @@ class UsuarioController
 
     public function logout(Request $request, EntityManager $em)
     {
+        
         $usuario = $em
             ->getRepository('Paada\Model\Usuario')
             ->findOneBy(array('username' => $request->post('form-username'),

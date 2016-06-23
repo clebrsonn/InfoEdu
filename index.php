@@ -38,15 +38,15 @@ $app->post('/login', function () use ($app, $entityManager) {
 
 });
 
-//$app->get('/acompanhamento', function () use ($app) {
+//$app->get('/acompanhamento', function () use ($app, $entityManager) {
 //    $app->render('/acompanhamento.html');
 //});
 
 
-$app->group('/professor', $auth, function () use ($app) {
+$app->group('/professor', $auth, function () use ($app, $entityManager) {
 
     // Get book with ID
-    $app->get('/agenda', function ($id) use ($app) {
+    $app->get('/agenda', function ($id) use ($app, $entityManager) {
         $app->render('/professor/agenda_prof.html');
 
     });
@@ -64,13 +64,13 @@ $app->group('/professor', $auth, function () use ($app) {
 });
 
 
-$app->group('/pais', function () use ($app) {
+$app->group('/pais', function () use ($app, $entityManager) {
 
-    $app->get('/', function () use ($app) {
+    $app->get('/', function () use ($app, $entityManager) {
         $app->render('/aluno/index.html');
     });
 
-    $app->get('/acompanhamento', function () use ($app) {
+    $app->get('/acompanhamento', function () use ($app, $entityManager) {
         $app->render('/aluno/acompanhamento.html');
 
     });

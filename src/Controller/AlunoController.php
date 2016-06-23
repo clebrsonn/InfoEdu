@@ -8,6 +8,10 @@
 
 namespace Paada\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Paada\Model\Aluno;
+use Slim\Http\Request;
+
 class AlunoController
 {
 
@@ -18,15 +22,15 @@ class AlunoController
     {
     }
 
-    public function novoAluno($request)
+    public function novoAluno(Request $request, EntityManager $em)
     {
 
-//        $user = new User();
-//        $form = $this->createForm('AppBundle\Form\UserType', $user);
-//        $form->handleRequest($request);
+        $aluno = new Aluno();
+        $form = $this->createForm('AppBundle\Form\UserType', $aluno);
+        $form->handleRequest($request);
 
 
-        $em->persist($user);
+        $em->persist($aluno);
         $em->flush();
 
     }
